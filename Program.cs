@@ -7,9 +7,11 @@ MyMain();
 static void MyMain()
 {
     Console.WriteLine("Entered main --> \n");
-    
-    TestAvgFunc();
-    
+
+    var x = new LinearDataStrucs();
+    x.TestLinkedList();
+
+
     Console.WriteLine("\nDone executing main -->");
     Console.ReadKey();
 }

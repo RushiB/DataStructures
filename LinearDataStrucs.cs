@@ -41,12 +41,17 @@ namespace DataStructures
                 value = val;
             }
 
+            public int GetValue()
+            {
+                return value;
+            }
+
             public node GetNextNode()
             {
                 return nextNode;
             }
             
-            public void SetNextNode(node next)
+            public void SetNextNode(ref node next)
             {
                 nextNode = next;
             }
@@ -54,7 +59,12 @@ namespace DataStructures
 
         public class ALinkedList
         {
-            node head;
+            private node head;
+
+            public node GetHeadNode()
+            {
+                return head;
+            }
 
             // TODO - creation and insertion
 
@@ -63,10 +73,10 @@ namespace DataStructures
                 head = null;
             }
              
-            //TODO - test if it works!!
             public void AddNode(int x)
             {
                 var newNode = new node(x);
+                var temp = head;
 
                 if (head == null)
                 {
@@ -74,18 +84,54 @@ namespace DataStructures
                 }
                 else
                 {
-                    var temp = head.GetNextNode();
-                    while(temp != null)
+                    while (temp != null)
                     {
-                        temp = temp.GetNextNode();
+                        if (temp.GetNextNode() == null)
+                        {
+                            temp.SetNextNode(ref newNode);
+                            break;
+                        }
+                        else
+                        {
+                            temp = temp.GetNextNode();
+                        }
                     }
+                }
+            }
 
-                    temp.SetNextNode(newNode);
+        }
+
+        public void TraverseList(node headNode)
+        {
+            if (headNode == null)
+            {
+                Console.WriteLine("LL is empty!");
+            }
+            else
+            {
+                int count = 0;
+                node temp = headNode;
+                while (temp != null)
+                {
+                    Console.WriteLine($"Inside node#{count} with value = {temp.GetValue()}");
+                    count++;
+                    temp = temp.GetNextNode();
                 }
             }
 
         }
 
 
+        public void TestLinkedList()
+        {
+            ALinkedList myLl = new ALinkedList();
+            myLl.AddNode(1);
+            myLl.AddNode(2);
+            myLl.AddNode(3);
+            myLl.AddNode(4);
+
+            TraverseList(myLl.GetHeadNode());
+            
+        }
     }
 }
