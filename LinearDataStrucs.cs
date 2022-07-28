@@ -62,7 +62,7 @@ namespace DataStructures
             {
                 head = null;
             }
-
+             
             //TODO - test if it works!!
             public void AddNode(int x)
             {
