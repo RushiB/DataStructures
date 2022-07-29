@@ -46,6 +46,11 @@ namespace DataStructures
                 return value;
             }
 
+            public void SetValue(int newVal)
+            {
+                value = newVal;
+            }
+
             public node GetNextNode()
             {
                 return nextNode;
@@ -66,7 +71,10 @@ namespace DataStructures
                 return head;
             }
 
-            // TODO - creation and insertion
+            public void SetHeadNode(ref node newHead)
+            {
+                head = newHead;
+            }
 
             public ALinkedList()
             {
@@ -118,9 +126,40 @@ namespace DataStructures
                     temp = temp.GetNextNode();
                 }
             }
-
         }
 
+        public void DeleteNodeWithVal(int val, ALinkedList list1)
+        {
+            Console.WriteLine($"Delete node with value {val}");
+
+            if (list1 != null)
+            {
+                node currNode = list1.GetHeadNode();
+                while (currNode != null)
+                {
+                    node nextNode = currNode.GetNextNode();
+                    if (currNode.GetValue() == val)
+                    {
+                        if (nextNode != null)
+                        {
+                            currNode.SetValue(nextNode.GetValue());
+                            node z = nextNode.GetNextNode();
+                            currNode.SetNextNode(ref z);
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        currNode = nextNode;
+                    }
+                }
+            }
+            else //temp = null
+            {
+                Console.WriteLine("Linked list is empty, cannot remove the given val as it does not exist!");
+            }
+
+        }
 
         public void TestLinkedList()
         {
@@ -131,7 +170,10 @@ namespace DataStructures
             myLl.AddNode(4);
 
             TraverseList(myLl.GetHeadNode());
-            
+
+            DeleteNodeWithVal(3, myLl);
+
+            TraverseList(myLl.GetHeadNode());
         }
     }
 }
