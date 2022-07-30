@@ -260,7 +260,7 @@ namespace DataStructures
                             {
                                 nextNode.prevNode = prevNode;
                             }
-
+                             
                             Console.WriteLine($"Found a node with value {x} and deleted it.");
                         }
                         currNode = currNode.nextNode;
