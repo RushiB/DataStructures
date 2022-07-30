@@ -9,7 +9,7 @@ static void MyMain()
     Console.WriteLine("Entered main --> \n");
 
     var x = new LinearDataStrucs();
-    x.TestDoubleLL();
+    x.TestMyStack();
 
 
     Console.WriteLine("\nDone executing main -->");

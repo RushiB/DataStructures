@@ -196,9 +196,11 @@ namespace DataStructures
             }
         }
 
+        // todo - update add node to use tail node (instead of having to go through full list all time!
+
         class DoubleLinkedList
         {
-            nodeDuo head = null;
+            public nodeDuo head = null;
             //nodeDuo tail = null;
 
             public void AddNode(int x)
@@ -269,27 +271,49 @@ namespace DataStructures
             
             }
 
-            public void TraverseList()
+            public void TraverseList() //int direction = 0)
             {
                 nodeDuo currNode = head;
                 nodeDuo lastNode = null;
+                /*
+                // (direction== 0) // default do it both directions
+                bool topToBottom = true;
+                bool bottomToTop = true;
 
-                Console.WriteLine("Traversing top to bottom:");
-                while (currNode != null)
+                if (direction == 1) 
                 {
-                    Console.WriteLine($"current node value = {currNode.GetValue()}");
-                    lastNode = currNode;
-                    currNode = currNode.nextNode;
+                    bottomToTop = true;
+                    topToBottom = false;
                 }
-
-                Console.WriteLine("Traversing bottom to top:");
-                currNode = lastNode;
-
-                while (currNode != null)
+                else if (direction == -1)
                 {
-                    Console.WriteLine($"current node value = {currNode.GetValue()}");
+                    bottomToTop = false;
+                    topToBottom = true;
+                }
+                */
+                if (currNode == null)
+                {
+                    Console.WriteLine("LL is empty!");
+                }
+                else
+                {
+                    Console.WriteLine("Traversing top to bottom:");
+                    while (currNode != null)
+                    {
+                        Console.WriteLine($"current node value = {currNode.GetValue()}");
+                        lastNode = currNode;
+                        currNode = currNode.nextNode;
+                    }
 
-                    currNode = currNode.prevNode;
+                    Console.WriteLine("Traversing bottom to top:");
+                    currNode = lastNode;
+
+                    while (currNode != null)
+                    {
+                        Console.WriteLine($"current node value = {currNode.GetValue()}");
+
+                        currNode = currNode.prevNode;
+                    }
                 }
             }
 
@@ -313,94 +337,140 @@ namespace DataStructures
 
         #endregion
 
-
-
-        #region Stacks
+        #region Stacks - with LL
 
         // can be implemented using array and LinkedList
 
 
         // impl using LL
-        class AStack : ALinkedList
+        class AStack : DoubleLinkedList
         {
-            node initialNode = null; // initial node = head of LL = bottom of stack
-            node top = null;
+            //nodeDuo initialNode = null; // initial node = head of LL = bottom of stack
+            public nodeDuo top = null;
+            public nodeDuo bottom = null;
 
-            public node GetTopOfStack()
+            // same as peek
+            public int GetTopOfStack()
             {
-                // top of stack would be last node added to the list
-                if (initialNode == null)
-                {
-                    initialNode = GetHeadNode();
-                }
-                // check head again if null
-                if (initialNode == null)
-                {
-                    // this means list is empty and tail will also be null
-                    top = null;
-                }
-                else
-                {
-                    node temp = initialNode.GetNextNode();
-                    if (temp == null)
-                    {
-                        top = initialNode;
-                    }
-                    else
-                    {
-                        while (temp != null)
-                        {
-                            if (temp.GetNextNode() != null)
-                            {
-                                temp = temp.GetNextNode();
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
-                        
-                        top = temp;
-                    }
-                }
-
-                return top;
+                return top.GetValue();
             }
 
             public void Push(int n)
             {
-                //AddNode(n);
-                top = GetTopOfStack();
-                if (top == null)
+                nodeDuo newNode = new nodeDuo(n);
+
+                if (bottom == null)
                 {
-                    // todo
+                    bottom = newNode;
+                    top = bottom;
                 }
                 else
                 {
+                    nodeDuo currNode = top;
+                    
+                    currNode.nextNode = newNode;
+                    newNode.prevNode = currNode;
 
+                    top = newNode;
                 }
-
             }
 
-            public node Pop()
+            public int Pop()
             {
-                node temp = null;
+                // remove top and return
+                nodeDuo poppedNode = top;
 
+                if (top == null)
+                {
+                    Console.WriteLine("Stack is empty! returning null.");
+                }
+                else
+                {
+                    var prevNode = top.prevNode;
 
+                    if (prevNode == null)
+                    {
+                        // this means we have only single node in stack
+                        // stack will be empty now
+                        poppedNode = bottom;
 
+                        top = null;
+                        bottom = null;
+                    }
+                    else
+                    {
+                        prevNode.nextNode = null;
+                        top = prevNode;
+                    }
+                }
 
-                return temp;
+                return poppedNode.GetValue();
+            }
+
+            public new void TraverseList()
+            {
+                head = bottom;
+                ((DoubleLinkedList)this).TraverseList();
             }
 
         }
 
+        public void TestMyStack()
+        {
+            var myStack = new AStack();
+            myStack.Push(1);
+            myStack.Push(2);
+            myStack.Push(3);
+            myStack.Push(10);
+            myStack.Push(4);
+            myStack.Push(10);
+            myStack.Push(5);
+
+            myStack.TraverseList();
+
+            myStack.DeleteNode(10); //1 //3 //4
+            myStack.TraverseList();
+
+            var y = myStack.Pop();
+            Console.WriteLine($"\n\nPopped-item = {y}");
+
+            var x = myStack.GetTopOfStack();
+            Console.WriteLine($"\n\nTopOfStack = {x}");
+            
+            myStack.TraverseList();
+        }
+
+
+        #endregion
+
+        //TODO
+        #region stack with array
+
+        class AStackArray
+        {
+            nodeDuo[] list = {};
+
+            public void AddNode(int x)
+            {
+                if (list.Length == 0)
+                {
+                    //TODO
+                    //list.Add(new nodeDuo(x));
+                }
+            }
+
+
+        }
 
 
         #endregion
 
 
 
-        #region le
+        #region Queue
+
+
+
 
         #endregion
 
