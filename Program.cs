@@ -9,7 +9,7 @@ static void MyMain()
     Console.WriteLine("Entered main --> \n");
 
     var x = new LinearDataStrucs();
-    x.TestMyStack();
+    x.TestMyQue();
 
 
     Console.WriteLine("\nDone executing main -->");

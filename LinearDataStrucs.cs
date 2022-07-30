@@ -469,8 +469,99 @@ namespace DataStructures
 
         #region Queue
 
+        class Queue : DoubleLinkedList
+        {
+            nodeDuo first = null;
+            nodeDuo last = null;
 
+            public void enqueue(int x)
+            {
+                nodeDuo newNode = new nodeDuo(x);
 
+                if(first == null && last == null)
+                {
+                    first = newNode;
+                    last = first;
+                }
+                else if (first != null || last != null) 
+                {
+                    last.nextNode       = newNode;
+                    newNode.prevNode    = last;
+                    last                = newNode;
+                }
+                else if ((first == null || last != null)|| (first != null || last == null))
+                {
+                    // this shud not happen
+                    Console.WriteLine("WARNING!");
+                }
+            }
+
+            public int dequeue()
+            {
+                int returnVal = int.MinValue;
+
+                if (first == null && last == null)
+                {
+                    Console.WriteLine();
+                    return int.MinValue;
+                    //throw new Exception("deque called on an empty queue!");
+                }
+                else
+                {
+                    // breaking when empty - fix it
+                    returnVal = first.GetValue();
+
+                    first = first.nextNode;
+
+                    if (first != null)
+                    {
+                        first.prevNode = null;
+                    }
+                }
+
+                return returnVal;
+            }
+
+            public bool isEmpty()
+            {
+                return (first == null && last == null);
+            }
+
+            public new void TraverseList()
+            {
+                head = first;
+                ((DoubleLinkedList)this).TraverseList();
+            }
+
+        }
+
+        public void TestMyQue()
+        {
+            var myQue = new Queue();
+            myQue.enqueue(1);
+            myQue.enqueue(2);
+            myQue.enqueue(3);
+            //myQue.enqueue(10);
+            //myQue.enqueue(4);
+            //myQue.enqueue(10);
+            //myQue.enqueue(5);
+            //myQue.enqueue(6);
+
+            myQue.TraverseList();
+
+            var y = myQue.dequeue();
+            Console.WriteLine($"\n\n dequeued-item = {y}");
+            myQue.TraverseList();
+
+            y = myQue.dequeue();
+            Console.WriteLine($"\n\n dequeued-item = {y}");
+            myQue.TraverseList();
+            
+            y = myQue.dequeue();
+            Console.WriteLine($"\n\n dequeued-item = {y}");
+            myQue.TraverseList();
+
+        }
 
         #endregion
 
