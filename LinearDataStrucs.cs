@@ -55,7 +55,7 @@ namespace DataStructures
         }
 
         // Linked list - to do variations:
-        //      - doubly and circular linked list
+        //      - circular linked list
         //      - and circular doubly linked list
 
         #region LinkedList
@@ -253,7 +253,7 @@ namespace DataStructures
                             }
                             else
                             {
-                                // we are deleting head, so update it
+                                // we are deleting head, so update head node
                                 head = nextNode;
                             }
                             if (nextNode != null)
@@ -261,15 +261,9 @@ namespace DataStructures
                                 nextNode.prevNode = prevNode;
                             }
 
-
-
                             Console.WriteLine($"Found a node with value {x} and deleted it.");
-                            break;
                         }
-                        else
-                        {
-                            currNode = currNode.nextNode;
-                        }
+                        currNode = currNode.nextNode;
                     }
                 }
             
@@ -307,18 +301,15 @@ namespace DataStructures
             myLl.AddNode(1);
             myLl.AddNode(2);
             myLl.AddNode(3);
+            myLl.AddNode(10);
+            myLl.AddNode(10);
             myLl.AddNode(4);
 
             myLl.TraverseList();
 
-            myLl.DeleteNode(4); //1 //3
+            myLl.DeleteNode(10); //1 //3 //4
             myLl.TraverseList();
-
-            //TraverseList(myLl.GetHeadNode());
-            //DeleteNodeWithVal(3, myLl);
-            //TraverseList(myLl.GetHeadNode());
         }
-
 
         #endregion
 
