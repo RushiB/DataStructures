@@ -17,18 +17,10 @@ namespace DataStructures
          */
 
         //TODO
-        /*  Linked List 
+        /*  
             Stack
             Queue
          */
-
-        /// <summary>
-        /// linked list has a Head
-        /// 
-        /// each node has value and pointer to next node
-        /// note - next node pointer would be null for last node (for non circular linked list)
-        /// </summary>
-
 
         public class node
         {
@@ -55,12 +47,24 @@ namespace DataStructures
             {
                 return nextNode;
             }
-            
+
             public void SetNextNode(ref node next)
             {
                 nextNode = next;
             }
         }
+
+        // Linked list - to do variations:
+        //      - doubly and circular linked list
+        //      - and circular doubly linked list
+
+        #region LinkedList
+        /// <summary>
+        /// linked list has a Head
+        /// 
+        /// each node has value and pointer to next node
+        /// note - next node pointer would be null for last node (for non circular linked list)
+        /// </summary>
 
         public class ALinkedList
         {
@@ -175,5 +179,240 @@ namespace DataStructures
 
             TraverseList(myLl.GetHeadNode());
         }
+
+        #endregion
+
+
+        #region Doubly LL
+
+        class nodeDuo : node // DoubleLinked
+        {
+            public nodeDuo nextNode = null;
+            public nodeDuo prevNode = null;
+
+            public nodeDuo(int val) : base(val)
+            {
+                SetValue(val);
+            }
+        }
+
+        class DoubleLinkedList
+        {
+            nodeDuo head = null;
+            //nodeDuo tail = null;
+
+            public void AddNode(int x)
+            {
+                nodeDuo newNode = new nodeDuo(x);
+
+                if (head == null)
+                {
+                    head = newNode;
+                }
+                else
+                {
+                    nodeDuo currNode = head;
+
+                    while(currNode != null)
+                    {
+                        if (currNode.nextNode == null)
+                        {
+                            currNode.nextNode = newNode;
+                            newNode.prevNode = currNode;
+                            break;
+                        }
+                        else
+                        {
+                            currNode = currNode.nextNode;
+                        }
+                    }
+                }
+            }
+
+            public void DeleteNode(int x)
+            {
+                if(head == null)
+                {
+                    Console.WriteLine("LL is empty!");
+                }
+                else
+                {
+                    var currNode = head;
+
+                    while(currNode != null)
+                    {
+                        if (currNode.GetValue() == x)
+                        {
+                            var nextNode = currNode.nextNode;
+                            var prevNode = currNode.prevNode;
+
+                            // first and last nodes prev and next nodes might not be there!
+                            if(prevNode != null)
+                            {
+                                prevNode.nextNode = nextNode;
+                            }
+                            else
+                            {
+                                // we are deleting head, so update it
+                                head = nextNode;
+                            }
+                            if (nextNode != null)
+                            {
+                                nextNode.prevNode = prevNode;
+                            }
+
+
+
+                            Console.WriteLine($"Found a node with value {x} and deleted it.");
+                            break;
+                        }
+                        else
+                        {
+                            currNode = currNode.nextNode;
+                        }
+                    }
+                }
+            
+            }
+
+            public void TraverseList()
+            {
+                nodeDuo currNode = head;
+                nodeDuo lastNode = null;
+
+                Console.WriteLine("Traversing top to bottom:");
+                while (currNode != null)
+                {
+                    Console.WriteLine($"current node value = {currNode.GetValue()}");
+                    lastNode = currNode;
+                    currNode = currNode.nextNode;
+                }
+
+                Console.WriteLine("Traversing bottom to top:");
+                currNode = lastNode;
+
+                while (currNode != null)
+                {
+                    Console.WriteLine($"current node value = {currNode.GetValue()}");
+
+                    currNode = currNode.prevNode;
+                }
+            }
+
+        }
+
+        public void TestDoubleLL()
+        {
+            var myLl = new DoubleLinkedList();
+            myLl.AddNode(1);
+            myLl.AddNode(2);
+            myLl.AddNode(3);
+            myLl.AddNode(4);
+
+            myLl.TraverseList();
+
+            myLl.DeleteNode(4); //1 //3
+            myLl.TraverseList();
+
+            //TraverseList(myLl.GetHeadNode());
+            //DeleteNodeWithVal(3, myLl);
+            //TraverseList(myLl.GetHeadNode());
+        }
+
+
+        #endregion
+
+
+
+        #region Stacks
+
+        // can be implemented using array and LinkedList
+
+
+        // impl using LL
+        class AStack : ALinkedList
+        {
+            node initialNode = null; // initial node = head of LL = bottom of stack
+            node top = null;
+
+            public node GetTopOfStack()
+            {
+                // top of stack would be last node added to the list
+                if (initialNode == null)
+                {
+                    initialNode = GetHeadNode();
+                }
+                // check head again if null
+                if (initialNode == null)
+                {
+                    // this means list is empty and tail will also be null
+                    top = null;
+                }
+                else
+                {
+                    node temp = initialNode.GetNextNode();
+                    if (temp == null)
+                    {
+                        top = initialNode;
+                    }
+                    else
+                    {
+                        while (temp != null)
+                        {
+                            if (temp.GetNextNode() != null)
+                            {
+                                temp = temp.GetNextNode();
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                        
+                        top = temp;
+                    }
+                }
+
+                return top;
+            }
+
+            public void Push(int n)
+            {
+                //AddNode(n);
+                top = GetTopOfStack();
+                if (top == null)
+                {
+                    // todo
+                }
+                else
+                {
+
+                }
+
+            }
+
+            public node Pop()
+            {
+                node temp = null;
+
+
+
+
+                return temp;
+            }
+
+        }
+
+
+
+        #endregion
+
+
+
+        #region le
+
+        #endregion
+
+
     }
 }
