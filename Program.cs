@@ -9,8 +9,10 @@ static void MyMain()
     Console.WriteLine("Entered main --> \n");
 
     var x = new LinearDataStrucs();
-    x.TestMyQue();
+    //x.TestMyQue();
 
+    var y = new NonLinearDataStructures();
+    y.TestTree();
 
     Console.WriteLine("\nDone executing main -->");
     Console.ReadKey();
