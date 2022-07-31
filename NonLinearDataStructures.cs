@@ -31,7 +31,7 @@ namespace DataStructures
 
         class Tree
         {
-            node root = null;
+            public node root = null;
 
             
             public void AddNode(int x)
@@ -78,7 +78,23 @@ namespace DataStructures
                 }
             }
 
-        
+            public void InOrderTraverseTree(node root)
+            {
+                if (root == null)
+                {
+                    return;
+                    //Console.WriteLine("Tree is empty!");
+                }
+                else
+                {
+                    if(root.children[0] != null)
+                        InOrderTraverseTree(root.children[0]);
+                    Console.WriteLine(root.value);
+                    
+                    if(root.children[1] != null)
+                        InOrderTraverseTree(root.children[1]);
+                }
+            }
         
         
         }
@@ -92,17 +108,18 @@ namespace DataStructures
             
             tree.AddNode(45);
             tree.AddNode(19);
-            
-            //tree.AddNode(72);
-            //tree.AddNode(56);
-            //tree.AddNode(58);
-            //tree.AddNode(52);
-            //tree.AddNode(47);
 
+            //tree.InOrderTraverseTree(tree.root);
+
+            tree.AddNode(72);
+            tree.AddNode(56);
+            tree.AddNode(58);
+            tree.AddNode(52);
+            tree.AddNode(47);
+
+            tree.InOrderTraverseTree(tree.root);
 
         }
-
-
 
 
     }
