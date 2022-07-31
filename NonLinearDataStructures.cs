@@ -121,6 +121,8 @@ namespace DataStructures
 
         }
 
+        // todo 
+        // get height, # of leaves (i.e. no children)
 
     }
 }
