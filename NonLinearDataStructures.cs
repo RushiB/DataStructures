@@ -124,5 +124,12 @@ namespace DataStructures
         // todo 
         // get height, # of leaves (i.e. no children)
 
+
+        // for sorting~? TBD
+            // extract min - remove min and replace with last bottom right most and bubble up
+            // insert - add at
+
+
+        // sample ref https://www.youtube.com/watch?v=pN1RWeX47tg
     }
 }
