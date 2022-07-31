@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DataStructures;
+using DataStructuresAndAlgos;
 
-namespace DataStructures
+namespace DataStructuresAndAlgos
 {
     public class NonLinearDataStructures
     {
@@ -124,6 +124,7 @@ namespace DataStructures
         // todo 
         // get height, # of leaves (i.e. no children)
 
+        // update traversal func to print same level nodes in one line - possible? TBD
 
         // for sorting~? TBD
             // extract min - remove min and replace with last bottom right most and bubble up

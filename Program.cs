@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using DataStructures;
+using DataStructuresAndAlgos;
+using DataStructuresAndAlgos.Algos;
 
 MyMain();
 
@@ -12,7 +13,10 @@ static void MyMain()
     //x.TestMyQue();
 
     var y = new NonLinearDataStructures();
-    y.TestTree();
+    //y.TestTree();
+
+    var z = new Sort();
+    z.TestSort();
 
     Console.WriteLine("\nDone executing main -->");
     Console.ReadKey();
