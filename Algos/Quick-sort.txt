@@ -1,0 +1,72 @@
+using System;
+
+class Program 
+{
+  public static void PrintArr(int[] arr)
+  {
+    foreach(int x in arr)
+      Console.Write(x + ",");
+    Console.WriteLine ();
+  }
+
+  
+  public static void Swap(int[] arr, int i, int pIdx)
+  {
+    int temp = arr[i];
+    arr[i] = arr[pIdx];
+    arr[pIdx] = temp;
+  }
+  
+  public static int Partition(int[] arr, int left, int right)
+  {
+    int pIdx = left; //partitionIdx
+    int i = left;
+    int pivot = arr[right];
+
+    Console.WriteLine ($"Entered Partition L= {left}, R = {right}-->");
+    PrintArr(arr);
+    
+    while(i < right)
+    {
+      if(arr[i] < pivot)
+      {
+        Swap(arr, i, pIdx);
+        pIdx++;
+      }
+      i++;
+    }
+    Swap(arr, pIdx, right);
+    PrintArr(arr);
+    Console.WriteLine ($"End of Partition, pivotIndex = {pIdx} <--\n\n");
+    
+    return pIdx;
+  }
+
+  public static void QuickSort(int[] arr, int left, int right)
+  {
+    if(left < right)
+    {
+      int pivotIndex = Partition(arr, left, right);
+      // Console.WriteLine ($"\npivotIndex = {pivotIndex}");
+      // PrintArr(arr);
+      
+      QuickSort(arr, left, pivotIndex-1);
+      QuickSort(arr, pivotIndex, right);
+    }
+  }
+
+  
+  public static void Main (string[] args) 
+  {
+    Console.WriteLine ("Hello World");
+
+    // int[] arr = new int[] {8,6,4,3,9};
+    // int[] arr = new int[] {6,8,3,2,1,7,5,4};
+    int[] arr = new int[] {8,7,6,5,4,3,2,1};
+
+    QuickSort(arr, 0, arr.Length-1);
+    
+    PrintArr(arr);
+  }
+  
+}
